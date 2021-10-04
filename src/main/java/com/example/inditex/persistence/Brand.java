@@ -35,4 +35,9 @@ public class Brand {
 		this.brandName = brandName;
 	}
 
+	@Override
+	public String toString() {
+		return "Brand [brandId=" + brandId + ", brandName=" + brandName + "]";
+	}
+
 }
