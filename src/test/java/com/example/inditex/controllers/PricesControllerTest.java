@@ -19,6 +19,7 @@ public class PricesControllerTest {
 	@Autowired
 	PricesController pricesController;
 
+	/*
 	@Test
 	public void testGetAllPrices() {
 		ResponseEntity<List<Prices>> pricesList = pricesController.getAllPrices();
@@ -28,5 +29,6 @@ public class PricesControllerTest {
 		});
 		pricesList.getStatusCode().is2xxSuccessful();
 	}
+	*/
 
 }

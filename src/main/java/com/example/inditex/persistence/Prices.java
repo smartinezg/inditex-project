@@ -1,25 +1,38 @@
 package com.example.inditex.persistence;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import lombok.Data;
+import org.hibernate.annotations.NotFound;
+import org.hibernate.annotations.NotFoundAction;
 
 @Entity
-@Table(name = "PRICES") 
+@Table(name = "PRICES")
+@Data
 public class Prices {
-	
-	@Id
-	@Column(name = "BRAND_ID")
-	private Integer brandId;
 
-	@OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "BRAND_ID", referencedColumnName = "BRAND_ID")
-    private Brand brand;
-	
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "PRICES_ID")
+	private Integer pricesId;
+
+	//@ManyToOne
+
+	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	@JoinColumn(name = "brand_id", nullable = false)
+	@JsonBackReference
+	private Brand brand;
+
 	@Column(name = "START_DATE")
 	private String startDate;
 
@@ -41,83 +54,5 @@ public class Prices {
 	@Column(name = "CURR")
 	private String curr;
 
-	@Override
-	public String toString() {
-		return "Prices [brandId=" + brandId + ", brand=" + brand + ", startDate=" + startDate + ", endDate=" + endDate
-				+ ", priceList=" + priceList + ", productId=" + productId + ", priority=" + priority + ", price="
-				+ price + ", curr=" + curr + "]";
-	}
-	
-	public Integer getBrandId() {
-		return brandId;
-	}
-
-	public void setBrandId(Integer brandId) {
-		this.brandId = brandId;
-	}
-
-	public Brand getBrand() {
-		return brand;
-	}
-
-	public void setBrand(Brand brand) {
-		this.brand = brand;
-	}
-
-	public String getStartDate() {
-		return startDate;
-	}
-
-	public void setStartDate(String startDate) {
-		this.startDate = startDate;
-	}
-
-	public String getEndDate() {
-		return endDate;
-	}
-
-	public void setEndDate(String endDate) {
-		this.endDate = endDate;
-	}
-
-	public String getPriceList() {
-		return priceList;
-	}
-
-	public void setPriceList(String priceList) {
-		this.priceList = priceList;
-	}
-
-	public String getProductId() {
-		return productId;
-	}
-
-	public void setProductId(String productId) {
-		this.productId = productId;
-	}
-
-	public String getPriority() {
-		return priority;
-	}
-
-	public void setPriority(String priority) {
-		this.priority = priority;
-	}
-
-	public String getPrice() {
-		return price;
-	}
-
-	public void setPrice(String price) {
-		this.price = price;
-	}
-
-	public String getCurr() {
-		return curr;
-	}
-
-	public void setCurr(String curr) {
-		this.curr = curr;
-	}
 
 }
